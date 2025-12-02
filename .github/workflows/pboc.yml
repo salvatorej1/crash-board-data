@@ -1,0 +1,26 @@
+name: Update PBOC Data
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # Every 6 hours
+  workflow_dispatch:        # Allow manual run
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Fetch PBOC Total Assets (MacroMicro JSON)
+        run: |
+          curl -A "Mozilla/5.0" \
+          "https://en.macromicro.me/charts/5814/embed?format=json" \
+          -o data/pboc.json
+
+      - name: Commit updated data
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update PBOC dataset"
+          file_pattern: data/pboc.json
