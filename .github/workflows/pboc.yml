@@ -19,6 +19,6 @@ jobs:
       - name: Commit updated data
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-            commit_message: "Update PBOC dataset"
-            file_pattern: data/pboc.json
-            push_options: '--force'
+         commit_message: "Update PBOC dataset"
+         file_pattern: data/pboc.json
+         push_options: '--force'
