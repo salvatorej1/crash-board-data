@@ -13,10 +13,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Fetch PBOC Total Assets (MacroMicro JSON)
+      - name: Fetch PBOC Total Assets (BIS)
         run: |
-          curl -A "Mozilla/5.0" \
-          "https://en.macromicro.me/charts/5814/embed?format=json" \
+          curl "https://stats.bis.org/api/data/CB_P?format=sdmx-json&limit=2000&country=CN&dimensions=BS_A" \
           -o data/pboc.json
 
       - name: Commit updated data
