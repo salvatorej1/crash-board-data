@@ -16,9 +16,5 @@ jobs:
       - name: Test IMF connectivity
         run: curl -I "https://dataservices.imf.org/REST/SDMX_JSON.svc/"
 
-      - name: Commit updated data
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-         commit_message: "Update PBOC dataset"
-         file_pattern: data/pboc.json
-         push_options: '--force'
+      - name: Fetch PBOC Total Assets (BIS SDMX)
+        run: curl -L "https://stats.bis.org/api/v1/SDMX/JSON/data/BIS_CB/A.CN._X.T.A?detail=full" -o data/pboc.json
